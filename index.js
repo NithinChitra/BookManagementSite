@@ -10,6 +10,8 @@ app.set('views',path.join(__dirname,'view'));
 
 const bodyParser = require('body-parser');
 
+app.use(express.static('public'));
+
 // use bodyparser to parse the json data sent from the form
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

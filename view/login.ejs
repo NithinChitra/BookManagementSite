@@ -4,7 +4,7 @@
     </head>
     <style>
         body {
-            background-image: url("backimg.jpg");
+            background-image: url("/images/addimg.png");
             background-size: cover;
             background-repeat: no-repeat;
             font-family: Arial, sans-serif;
@@ -36,6 +36,7 @@
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 3px;
+            outline:none;
         }
     
         button {
@@ -66,15 +67,21 @@
         a:hover {
             text-decoration: underline;
         }
+        .line1{
+            margin-bottom:10px;
+            margin-top:5px;
+        }
     </style>
     <body>
-        <h1>Login Form</h1>
+        
         <form action="/verify-login" method="POST">
+            <h1>Login Form</h1>
             <input type="email" name="email" placeholder="Enter your Email"/>
             <input type="password" name="password" placeholder="Enter your Password"/>
             <button>Login</button>
-            <div>No Account? <a href="/">Register Here</a></div>
-            <a href="/admin-login">Admin Login</a>
+            <div class="line1" style="font-size:17px;">No Account? <a href="/register" style="color:black;margin-left:3px;">Register Here</a></div>
+
+            <a href="/admin-login" style="color:black;font-size:17px;">Admin Login</a>
         </form>
     </body>
 </html>

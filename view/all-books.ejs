@@ -1,14 +1,65 @@
 <html>
     <head>
         <title>Get Books</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                color: #333;
+                margin: 0;
+                padding: 0;
+            }
+            
+            h1 {
+                background-color: #333;
+                color: #fff;
+                padding: 20px;
+                margin: 0;
+            }
+            ul {
+                list-style-type: none;
+                padding: 0;
+            }
+            
+            li {
+                background-color: #fff;
+                margin: 10px;
+                padding: 20px;
+               
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                align-items: center;
+            }
+            
+            button {
+                margin-top:20px;
+                background-color: red;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            button:hover{
+                opacity:0.8;
+            }
+                a{
+                    text-decoration: none;
+                    color:white;
+                }
+               
+            p {
+                margin: 5px 0;
+                margin-top:20px;
+            }
+            </style>
     </head>
     <body>
         <h1>Book section</h1>
-        <form action="/search-books" method="GET">
+        <!-- <form action="/search-books" method="GET">
             <label for="search">Search Books: </label>
             <input type="text" id="search" name="query" placeholder="Enter book title or author">
             <button type="submit">Search</button>
-        </form>
+        </form> -->
         <ul>
             <%for(i of books_list){%>
                 <li>

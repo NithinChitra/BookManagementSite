@@ -112,7 +112,7 @@ exports.createUser = async(req,res)=>{
         }
         createUserCollection(userid);
 
-        return res.redirect('/login');
+        return res.redirect('/');
         
     }
     catch(err){
@@ -239,7 +239,7 @@ exports.addToCart = async(req,res)=>{
     }catch(err){
         console.error('Error in adding book to user collection:', err);
         // Handle the error appropriately
-        return res.redirect('back');
+        return res.redirect('my-cart');
     }
 }
 

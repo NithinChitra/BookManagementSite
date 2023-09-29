@@ -2,8 +2,8 @@ const express = require('express');
 const Router = express.Router();
 const userController = require('../controller/userController');
 
-Router.get('/',userController.getPage);
-Router.get('/login',userController.getLogin);
+Router.get('/register',userController.getPage);
+Router.get('/',userController.getLogin);
 Router.get('/profile',userController.getProfile);
 Router.post('/verify-login',userController.verifyLogin);
 Router.post('/create-user',userController.createUser);
@@ -33,7 +33,7 @@ Router.post('/logout', (req,res)=>{
             console.log('Error while logging out');
         }
         else{
-            res.redirect('/login');
+            res.redirect('/');
         }
     });
 }); 
