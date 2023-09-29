@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Profile page</title>
+    </head>
+    <body>
+        <h1>Profile Page</h1>
+        <p>Name: <%=user_details.name%></p>
+        <p>Email: <%=user_details.email%></p>
+        <button><a href="/profile/get-books">Get books</a></button>
+        <button><a href="/my-cart">My Cart</a></button>
+        <form action="/logout" method="POST">
+            <button type="submit">Log Out</button>
+        </form>
+    </body>
+</html> 
