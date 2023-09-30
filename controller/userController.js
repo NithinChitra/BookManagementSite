@@ -3,6 +3,7 @@ const db = require('../config/db.js');
 const Books = require('../model/books');
 const mongoose = require('mongoose');
 const UserBook = require('../model/userBook');
+const bcrypt = require('bcrypt');
 
 
 exports.getAllBooks = async(req,res)=>{
@@ -20,6 +21,18 @@ exports.getAllBooks = async(req,res)=>{
     }
     catch(err){
         
+    }
+}
+
+// get update profile page
+exports.getUpdateProfile = async(req,res)=>{
+    try{
+        res.render('updateProfile',{
+
+        });
+    }
+    catch(err){
+
     }
 }
 
@@ -107,7 +120,7 @@ exports.createUser = async(req,res)=>{
                 await mongoose.connection.createCollection(userCollectionName);
                 console.log(`User collection "${userCollectionName}" created successfully`);
             }catch(err){
-                console.log(`Error in creating user collection: ${error}`);
+                console.log(`Error in creating user collection: ${err}`);
             }
         }
         createUserCollection(userid);
@@ -344,4 +357,56 @@ exports.getAdminProfile = async(req,res)=>{
     console.error('Error in loading admin profile:', err);
     res.redirect('/admin-login');
 }
+}
+
+//update profile logic
+exports.updateProfile = async(req,res)=>{
+    try{
+        const {name,password} = req.body;
+        const loggedIn = req.session.user;
+
+        if(!loggedIn){
+            return res.status(404).json({error:'User Not Found'});
+        }
+        
+        const userId = req.session.user._id;
+        const hashedPassword = await bcrypt.hash(password,10);
+        const updatedUser = await User.findByIdAndUpdate(userId,{name,password:hashedPassword},{new: true});
+
+        // res.json(updatedUser);
+        req.session.user.name = updatedUser.name;
+        req.session.user.email = updatedUser.email;
+        return res.redirect('/profile');
+    }
+    catch(error){
+        return res.status(500).json("Error occured");
+    }
+}
+
+//update quantity in my cart
+exports.updateQuantity = async(req,res)=>{
+    try{
+        const {book_data,quantity} = req.body;
+        const bookData = JSON.parse(book_data);
+        const bookId = bookData._id;
+        console.log(bookData);
+        book_data.quantity = quantity;
+        function generateUserCollectionName(userid){
+            return `books_${userid}`;
+        }
+        // console.log(req.session.user.userid);
+        const userCollectionName = generateUserCollectionName(req.session.user.userid);
+
+        const userCollection = mongoose.model(userCollectionName);
+
+        const updatedBook = await userCollection.findByIdAndUpdate(bookId,{quantity});
+        if (!updatedBook) {
+            return res.status(404).json({ error: 'Book not found' });
+        }
+
+        return res.redirect('/my-cart');
+    }
+    catch(err){
+        console.log("Error occured",err);
+    }
 }

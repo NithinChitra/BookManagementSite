@@ -47,4 +47,13 @@ Router.get('/admin-login',userController.adminLogin);
 //get admin profile page
 Router.get('/admin-profile',userController.getAdminProfile);
 
+//get update profile page
+Router.get('/get-update-profile',userController.getUpdateProfile);
+
+//update profile logic
+Router.post('/update-profile',userController.updateProfile);
+
+//update quantity
+Router.post('/update-quantity',userController.updateQuantity);
+
 module.exports = Router

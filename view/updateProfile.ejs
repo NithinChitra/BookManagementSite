@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Login Admin</title>
+        <title>Update Profile</title>
         <style>
             body {
                 background-image: url("../static/addimg.png");
@@ -28,7 +28,7 @@
                 color: #333;
             }
         
-            input[type="email"],
+            input[type="text"],
             input[type="password"] {
                 width: 100%;
                 padding: 10px;
@@ -69,11 +69,11 @@
         </style>
     </head>
     <body>
-        <form action="/verify-admin-login" method="POST">
-            <h1>Login Admin</h1>
-            <input type="email" name="email" placeholder="Enter your Email"/>
-            <input type="password" name="password" placeholder="Enter your Password"/>
-            <button>Login</button>
+        <form action="/update-profile" method="POST">
+            <h1>Update Profile</h1>
+            <input type="text" name="name" placeholder="Enter your new Name:"/>
+            <input type="password" name="password" placeholder="Enter your new Password"/>
+            <button>Save Changes</button>
         </form>
     </body>
 </html>
