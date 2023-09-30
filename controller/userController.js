@@ -138,7 +138,7 @@ exports.getProfile = async (req, res) => {
     try {
         // Check if the user is logged in
         if (!req.session.user) {
-            return res.redirect('/login');
+            return res.redirect('/');
         }
 
         console.log("testing",req.session.user);
@@ -147,7 +147,7 @@ exports.getProfile = async (req, res) => {
         res.render('profile', { user_details: req.session.user });
     } catch (err) {
         console.error('Error in loading profile:', err);
-        res.redirect('/login');
+        res.redirect('/');
     }
 }
 
@@ -170,6 +170,10 @@ exports.addBook = async(req,res)=>{
 //books displaying code
 exports.getBooks = async(req,res)=>{
     try{
+        if (!req.session.user) {
+            return res.redirect('/');
+            console.log("User not logged in");
+        }
         const books = await Books.find({}).exec();
         res.render('getBook',{
             books_list:books
@@ -362,6 +366,10 @@ exports.getAdminProfile = async(req,res)=>{
 //update profile logic
 exports.updateProfile = async(req,res)=>{
     try{
+        if (!req.session.user) {
+            return res.redirect('/');
+            console.log("User not logged in");
+        }
         const {name,password} = req.body;
         const loggedIn = req.session.user;
 
@@ -408,5 +416,19 @@ exports.updateQuantity = async(req,res)=>{
     }
     catch(err){
         console.log("Error occured",err);
+    }
+}
+
+//update book
+exports.updateBook = async(req,res)=>{
+    try{
+        const {title,price,bookId} = req.body;
+        // console.log(title,price,bookId);
+        const updatedDetails = await Books.findByIdAndUpdate(bookId,{title,price});
+        // console.log(updatedDetails);
+        return res.redirect("/all-books");
+    }
+    catch(err){
+        console.log("Error Occurred");
     }
 }

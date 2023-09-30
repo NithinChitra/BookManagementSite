@@ -56,4 +56,6 @@ Router.post('/update-profile',userController.updateProfile);
 //update quantity
 Router.post('/update-quantity',userController.updateQuantity);
 
+//update book
+Router.post('/update-book',userController.updateBook);
 module.exports = Router
